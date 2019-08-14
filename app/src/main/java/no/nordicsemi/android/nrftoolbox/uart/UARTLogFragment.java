@@ -52,6 +52,7 @@ import no.nordicsemi.android.log.LogContract;
 import no.nordicsemi.android.nrftoolbox.R;
 import no.nordicsemi.android.nrftoolbox.profile.BleProfileService;
 
+//Callback interface for a client to interact with the manager.
 public class UARTLogFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 	private static final String SIS_LOG_SCROLL_POSITION = "sis_scroll_position";
 	private static final int LOG_SCROLL_NULL = -1;
@@ -209,11 +210,15 @@ public class UARTLogFragment extends ListFragment implements LoaderManager.Loade
 
 		// Create the log adapter, initially with null cursor
 		mLogAdapter = new UARTLogAdapter(requireContext());
-		setListAdapter(mLogAdapter);
+
+//		An activity that displays a list of items by binding to a data source such as an array or Cursor,
+//		and exposes event handlers when the user selects an item.
+		setListAdapter(mLogAdapter); //
 	}
 
 	@NonNull
 	@Override
+//	Instantiate and return a new Loader for the given ID.
 	public Loader<Cursor> onCreateLoader(final int id, final Bundle args) {
 		switch (id) {
 			case LOG_REQUEST_ID: {

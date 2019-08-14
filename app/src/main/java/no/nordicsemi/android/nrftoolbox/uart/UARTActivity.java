@@ -232,6 +232,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 	protected void onCreateView(final Bundle savedInstanceState) {
 		setContentView(R.layout.activity_feature_uart);
 
+		Log.d(TAG, "onCreateView!!!");
 		mContainer = findViewById(R.id.container);
 		// Setup the sliding pane if it exists
 		final SlidingPaneLayout slidingPane = mSlider = findViewById(R.id.sliding_pane);

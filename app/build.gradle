@@ -69,4 +69,5 @@ dependencies {
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'xpp3', module: 'xpp3'
     }
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }

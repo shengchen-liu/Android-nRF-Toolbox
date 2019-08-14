@@ -99,6 +99,7 @@ public abstract class BleProfileService extends Service implements BleManagerCal
 
 			switch (state) {
 				case BluetoothAdapter.STATE_ON:
+
 					onBluetoothEnabled();
 					break;
 				case BluetoothAdapter.STATE_TURNING_OFF:

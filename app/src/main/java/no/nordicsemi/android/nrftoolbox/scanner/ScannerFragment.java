@@ -55,6 +55,8 @@ import no.nordicsemi.android.support.v18.scanner.ScanFilter;
 import no.nordicsemi.android.support.v18.scanner.ScanResult;
 import no.nordicsemi.android.support.v18.scanner.ScanSettings;
 
+import android.util.Log;
+
 /**
  * ScannerFragment class scan required BLE devices and shows them in a list. This class scans and filter
  * devices with standard BLE Service UUID and devices with custom BLE Service UUID. It contains a
@@ -135,6 +137,11 @@ public class ScannerFragment extends DialogFragment {
 		if (args != null && args.containsKey(PARAM_UUID)) {
 			mUuid = args.getParcelable(PARAM_UUID);
 		}
+
+//		High level manager used to obtain an instance of an BluetoothAdapter and to conduct overall Bluetooth Management.
+//
+//		Use Context.getSystemService(java.lang.String) with Context#BLUETOOTH_SERVICE to create an BluetoothManager,
+//		then call getAdapter() to obtain the BluetoothAdapter.
 
 		final BluetoothManager manager = (BluetoothManager) requireContext().getSystemService(Context.BLUETOOTH_SERVICE);
 		if (manager != null) {
@@ -232,7 +239,7 @@ public class ScannerFragment extends DialogFragment {
 		// Hide the rationale message, we don't need it anymore.
 		if (mPermissionRationale != null)
 			mPermissionRationale.setVisibility(View.GONE);
-
+		Log.d(TAG, "Click SCAN!!!!!!!!!!!!!!!");
 		mAdapter.clearDevices();
 		mScanButton.setText(R.string.scanner_action_cancel);
 

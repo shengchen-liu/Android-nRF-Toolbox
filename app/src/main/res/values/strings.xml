@@ -76,4 +76,8 @@
 	<string name="about_version">\n\nVersion: %s</string>
 	<string name="about_text">The nRF Toolbox is a container application that stores your Nordic Semiconductor apps in one location.</string>
 
+	<string name="status">Status</string>
+	<string name="id">ID</string>
+	<string name="id_unknown">Unknown </string>
+	<string name="battery_text">Battery</string>
 </resources>

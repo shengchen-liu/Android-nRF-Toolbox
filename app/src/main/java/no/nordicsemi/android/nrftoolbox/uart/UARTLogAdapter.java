@@ -26,11 +26,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
 import androidx.annotation.NonNull;
+
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
+import android.widget.CursorAdapter; //Adapter that exposes data from a Cursor to a ListView widget.
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -39,6 +41,8 @@ import no.nordicsemi.android.log.LogContract.Log.Level;
 import no.nordicsemi.android.nrftoolbox.R;
 
 public class UARTLogAdapter extends CursorAdapter {
+	private static final String TAG = "UARTLogAdapter";
+
 	private static final SparseIntArray mColors = new SparseIntArray();
 
 	static {
@@ -56,25 +60,37 @@ public class UARTLogAdapter extends CursorAdapter {
 
 	@Override
 	public View newView(final Context context, final Cursor cursor, final ViewGroup parent) {
+//		Instantiates a layout XML file into its corresponding View objects
 		final View view = LayoutInflater.from(context).inflate(R.layout.log_item, parent, false);
 
 		final ViewHolder holder = new ViewHolder();
 		holder.time = view.findViewById(R.id.time);
 		holder.data = view.findViewById(R.id.data);
+		holder.battery = view.findViewById(R.id.battery);
 		view.setTag(holder);
 		return view;
 	}
 
+//	Bind an existing view to the data pointed to by cursor
 	@Override
 	public void bindView(final View view, final Context context, final Cursor cursor) {
+//		Long, int, string
 		final ViewHolder holder = (ViewHolder) view.getTag();
 		final Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(cursor.getLong(1 /* TIME */));
 		holder.time.setText(context.getString(R.string.log, calendar));
-
 		final int level = cursor.getInt(2 /* LEVEL */);
-		holder.data.setText(cursor.getString(3 /* DATA */));
-		holder.data.setTextColor(mColors.get(level));
+		if(level != Level.INFO){
+			String message = cursor.getString(3);
+
+			holder.data.setText(cursor.getString(3 /* DATA */));
+			holder.data.setTextColor(mColors.get(level));
+			Log.v(TAG, "Log:" + message);
+			String battery_status = message.split(",", 0)[0];
+			holder.battery.setText(message.split(",", 0)[0]);
+		}
+
+
 	}
 
 	@Override
@@ -85,6 +101,7 @@ public class UARTLogAdapter extends CursorAdapter {
 	private class ViewHolder {
 		private TextView time;
 		private TextView data;
+		private TextView battery;
 	}
 
 }

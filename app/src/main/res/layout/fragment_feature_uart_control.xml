@@ -20,6 +20,7 @@
   ~ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -32,11 +33,11 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_centerVertical="true"
-		android:layout_marginLeft="@dimen/uart_feature_title_long_margin"
+		android:layout_marginStart="@dimen/uart_feature_title_long_margin"
 		android:rotation="270"
 		android:text="@string/uart_feature_title_long"
 		android:textColor="@color/verticalTitleColor"
-		android:textSize="32dp"
+		android:textSize="32sp"
 		android:textStyle="bold"/>
 
 	<androidx.appcompat.widget.AppCompatTextView
@@ -44,7 +45,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_centerHorizontal="true"
-		android:layout_marginLeft="10dp"
+		android:layout_marginStart="10dp"
 		android:layout_marginTop="@dimen/feature_device_name_margin_top"
 		android:ellipsize="end"
 		android:freezesText="true"
@@ -58,10 +59,86 @@
 		android:layout_height="match_parent"
 		android:layout_above="@+id/action_connect"
 		android:layout_below="@+id/device_name"
-		android:layout_marginLeft="@dimen/feature_horizontal_margin"
-		android:layout_marginRight="@dimen/feature_horizontal_margin"
-		android:gravity="center"
+		android:layout_marginStart="@dimen/feature_horizontal_margin"
+		android:layout_marginEnd="@dimen/feature_horizontal_margin"
+		android:gravity="center|top"
 		android:orientation="vertical">
+
+		<ListView
+			android:id="@android:id/list"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:divider="@null"
+			android:dividerHeight="0dp"
+			android:paddingLeft="8dp"
+			android:paddingRight="8dp"/>
+
+		<TextView
+			android:id="@+id/status"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/status"
+			android:textColor="@color/black"
+			android:textSize="24sp"
+			android:textStyle="bold" />
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/id_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:id="@+id/vehicle_id"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="@dimen/activity_horizontal_margin"
+				android:text="@string/id"
+				android:textColor="@color/black"
+				android:textSize="24sp"
+				android:textStyle="bold"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<TextView
+				android:id="@+id/display_id"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:padding="@dimen/activity_horizontal_margin"
+				android:text="@string/id_unknown"
+				android:textSize="24sp"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/vehicle_id" />
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/battery_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:visibility="visible">
+
+			<TextView
+				android:id="@+id/vehicle_battery"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="@dimen/activity_horizontal_margin"
+				android:text="@string/battery_text"
+				android:textColor="@color/black"
+				android:textSize="24sp"
+				android:textStyle="bold"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<TextView
+				android:id="@+id/display_battery"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:padding="@dimen/activity_horizontal_margin"
+				android:text="@string/id_unknown"
+				android:textSize="24sp"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/vehicle_battery" />
+		</androidx.constraintlayout.widget.ConstraintLayout>
 
 		<GridView
 			android:id="@+id/grid"
@@ -74,6 +151,11 @@
 			android:verticalSpacing="4dp"
 			tools:listitem="@layout/feature_uart_button"/>
 
+		<Button
+			android:id="@+id/click_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="click"/>
 	</LinearLayout>
 
 	<com.google.android.material.button.MaterialButton
@@ -84,7 +166,9 @@
 		android:layout_above="@+id/spacer"
 		android:layout_centerHorizontal="true"
 		android:onClick="onConnectClicked"
-		android:text="@string/action_connect"/>
+		android:text="@string/action_connect" />
+
+
 
 	<View
 		android:id="@+id/spacer"
